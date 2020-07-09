@@ -8,12 +8,12 @@ import './constants.dart';
 import './sample_data.dart';
 
 void main() => runApp(MaterialApp(
-    title: "BackStage",
-    theme: ThemeData(
-      primaryColor: kbgColor,
-    ),
-    home: Example(),
-    debugShowCheckedModeBanner: false,
+      title: "BackStage",
+      theme: ThemeData(
+        primaryColor: kbgColor,
+      ),
+      home: Example(),
+      debugShowCheckedModeBanner: false,
     ));
 
 class Example extends StatefulWidget {
@@ -37,16 +37,15 @@ class _ExampleState extends State<Example> {
         title: const Text('Search'),
         actions: <Widget>[
           IconButton(
-           icon: Icon(Icons.search),
-           onPressed: (){
-             showSearch(context: context, delegate: DataSearch());
-           },
-           ),
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: DataSearch());
+            },
+          ),
         ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
-        
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(color: kbgColor, boxShadow: [
@@ -88,33 +87,31 @@ class _ExampleState extends State<Example> {
     );
   }
 }
-class DataSearch extends SearchDelegate<String>{
+
+class DataSearch extends SearchDelegate<String> {
   @override
-  List<Widget> buildActions(BuildContext context){
+  List<Widget> buildActions(BuildContext context) {
     return [
-      IconButton(icon: Icon(Icons.clear),
-       onPressed: (){
-         query = " ";
-       }
-       ),
+      IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () {
+            query = " ";
+          }),
     ];
   }
 
   @override
-  Widget buildLeading(BuildContext context){
-    return IconButton
-      (icon: AnimatedIcon(
-        icon: AnimatedIcons.menu_arrow,
-        progress: transitionAnimation,
-      ), 
-      onPressed: (){
-
-      }
-      );
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow,
+          progress: transitionAnimation,
+        ),
+        onPressed: () {});
   }
 
   @override
-  Widget buildResults(BuildContext context){
+  Widget buildResults(BuildContext context) {
     return Card(
       color: Colors.red,
       child: Center(
@@ -124,11 +121,15 @@ class DataSearch extends SearchDelegate<String>{
   }
 
   @override
-  Widget buildSuggestions(BuildContext context){
-    return ListView.builder(itemBuilder: (context, index) => ListTile(
-      title: Text(Categories.toString()), 
-    ),
-    itemCount: Categories.length,
+  Widget buildSuggestions(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(Categories.elementAt(index).title),
+          onTap: () {},
+        );
+      },
+      itemCount: Categories.length,
     );
   }
 }
